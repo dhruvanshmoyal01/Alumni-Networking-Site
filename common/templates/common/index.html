@@ -1,0 +1,113 @@
+{% extends "common/Base.html" %}
+{% load static %}
+
+{% block style %}
+	<link rel="stylesheet" type="text/css" href="{% static 'common/customcss/index_style.css' %}">
+{% endblock style %}
+{% block content %}
+<!------------------------------------------------ header section -------------------------------------------------->
+<div class="header-container">
+  <div class="header">
+    <section class="header-section">
+      <div class="center-div">
+        <h1 class="font-weight-bold">
+          Alumni Association
+        </h1>
+        <p>Register yourself as alumni.</p>
+        <div class="header-buttons">
+          <a href="#">Learn more</a>
+          <a href="#">Register</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<!------------------------------------------------ Main -------------------------------------------------->
+<div class="container-fluid main-area">
+<div class="container">
+  <div class="row padding">
+    <div class="col-lg-9">
+      <div class="fundraing-pojects">
+        <h4>Fundraising Projects</h4>
+        <p><a class="view" href="#">View All</a></p><br/>
+        <hr>
+        <div class="container">
+          <div class="row up">
+            <div class="col-lg-6">
+              <img src="{% static 'common/images/team1.png' %}" height="250px" width="360px">
+              <h4>Project Heading 1</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>  
+            <div class="col-lg-6">
+              <img src="{% static 'common/images/team3.png' %}" height="250px" width="360px">
+              <h4>Project Heading 2</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modified fundraing-pojects">
+        <h4>Needs</h4>
+        <p class="view"><a href="#">View All</a></p><br/>
+        <hr>
+        <div class="container">
+          <div class="row up1">
+            <p style="text-align: center; margin-top: 20px ;margin-bottom:30px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur.</p>
+            <div class="three-icon">
+              <div class="container">
+                <div class="row">
+                	
+                  <div class="extra-div col-lg-4 col-md-6 col-12">
+                      <div class="icons">
+                    <a href="#"><i class="fa-4x fa fa-desktop"  aria-hidden="true"></i></a>
+                    <p>Choose a category</p>
+                          </div>
+                  </div>
+                  <div class="extra-div col-lg-4 col-md-6 col-12">
+                      <div class="icons">
+                    <a href="#"><i class="fa-4x fa fa-edit" aria-hidden="true"></i></a>
+                    <p>Post a need</p>
+                    </div>
+                  </div>
+                      <div class="icons">
+                  <div class="extra-div col-lg-4 col-12">
+                    <a href="#"><i class="fa-4x fa fa-magic" aria-hidden="true" ></i></a>
+                    <p>Get Response</p>
+                  </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="align-button">
+          <button type="button"  class="btn btn-primary ">Post a need</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="latest-news">
+        <h4>Latest News</h4><br/>
+          <hr>
+        <p>date1</p>
+        <p><a href="#">Lorem ipsum dolor sit amet</a></p>
+        <hr>
+        <p>date2</p>
+        <p><a href="#">Lorem ipsum dolor sit amet</a></p>
+        <hr>
+        <p>date3</p>
+        <p><a href="#">Lorem ipsum dolor sit amet</a></p>
+        <hr>
+        <a href="#">View all</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}

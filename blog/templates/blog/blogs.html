@@ -1,0 +1,15 @@
+{% extends "common/base.html" %}
+{% block content %}
+    {% for blog in blogs %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ blog.author }}</a>
+              <small class="text-muted">{{ blog.date_posted|date:"F d, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a></h2>
+            <p class="article-content">{{ blog.content }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
