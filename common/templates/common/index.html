@@ -13,11 +13,14 @@
         <h1 class="font-weight-bold">
           Alumni Association
         </h1>
-        <p>Register yourself as alumni.</p>
-        <div class="header-buttons">
-          <a href="#">Learn more</a>
-          <a href="#">Register</a>
-        </div>
+        {% if user.is_authenticated %}
+        {% else %}
+          <p>Register yourself as alumni.</p>
+          <div class="header-buttons">
+            <a href="#">Learn more</a>
+            <a href="#">Register</a>
+          </div>
+        {% endif %}
       </div>
     </section>
   </div>
@@ -62,25 +65,23 @@
             <div class="three-icon">
               <div class="container">
                 <div class="row">
-                	
                   <div class="extra-div col-lg-4 col-md-6 col-12">
-                      <div class="icons">
-                    <a href="#"><i class="fa-4x fa fa-desktop"  aria-hidden="true"></i></a>
-                    <p>Choose a category</p>
-                          </div>
-                  </div>
-                  <div class="extra-div col-lg-4 col-md-6 col-12">
-                      <div class="icons">
-                    <a href="#"><i class="fa-4x fa fa-edit" aria-hidden="true"></i></a>
-                    <p>Post a need</p>
+                    <div class="icons">
+                      <a href="#"><i class="fa-4x fa fa-desktop"  aria-hidden="true"></i></a>
+                      <p>Choose a category</p>
                     </div>
                   </div>
-                      <div class="icons">
-                  <div class="extra-div col-lg-4 col-12">
-                    <a href="#"><i class="fa-4x fa fa-magic" aria-hidden="true" ></i></a>
-                    <p>Get Response</p>
+                  <div class="extra-div col-lg-4 col-md-6 col-12">
+                    <div class="icons">
+                      <a href="#"><i class="fa-4x fa fa-edit" aria-hidden="true"></i></a>
+                      <p>Post a need</p>
+                    </div>
                   </div>
-
+                  <div class="extra-div col-lg-4 col-12">
+                    <div class="icons">
+                      <a href="#"><i class="fa-4x fa fa-magic"></i></a>
+                      <p>Get Response</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -94,17 +95,13 @@
     <div class="col-lg-3">
       <div class="latest-news">
         <h4>Latest News</h4><br/>
-          <hr>
-        <p>date1</p>
-        <p><a href="#">Lorem ipsum dolor sit amet</a></p>
         <hr>
-        <p>date2</p>
-        <p><a href="#">Lorem ipsum dolor sit amet</a></p>
+        {% for item in news %}
+        <p>{{ item.date_posted|date:"F d, Y" }}</p>
+        <p><a href="{% url 'news-detail' item.id %}">{{ item.title }}</a></p>
         <hr>
-        <p>date3</p>
-        <p><a href="#">Lorem ipsum dolor sit amet</a></p>
-        <hr>
-        <a href="#">View all</a>
+        {% endfor %}
+        <a href="{% url 'news-home' %}">View all</a>
       </div>
     </div>
   </div>

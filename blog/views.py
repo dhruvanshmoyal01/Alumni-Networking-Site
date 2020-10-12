@@ -19,7 +19,7 @@ class BlogListView(ListView):
 	model = Blog
 	template_name = 'blog/blogs.html'
 	context_object_name = 'blogs'
-	odering = ['-date_posted']
+	queryset = Blog.objects.order_by('-date_posted')
 
 class BlogDetailView(DetailView):
 	model = Blog
