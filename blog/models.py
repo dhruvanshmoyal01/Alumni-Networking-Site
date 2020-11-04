@@ -15,3 +15,21 @@ class Blog(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('blog-detail', kwargs={'pk':self.pk})
+
+class Blog_comment(models.Model):
+	blog = models.ForeignKey(to=Blog, on_delete=models.CASCADE)
+	msg = models.TextField()
+	commented_by = models.ForeignKey(to=User, on_delete=models.CASCADE)
+	date_posted = models.DateTimeField(default = timezone.now)
+	flag = models.CharField(max_length=20, null=True, blank=True, choices=(('abusive', 'abusive'), ('inappropriate', 'inappropriate'), ('other', 'other')))
+
+	def __str__(self):
+		return self.msg
+
+class Blog_upvote(models.Model):
+	blog = models.ForeignKey(to=Blog, on_delete=models.CASCADE)
+	upvote_by = models.ForeignKey(to=User, on_delete=models.CASCADE)
+	date_posted = models.DateTimeField(default = timezone.now)
+	
+	def __str__(self):
+		return self.upvote_by.username

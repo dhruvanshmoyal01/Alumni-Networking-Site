@@ -1,0 +1,18 @@
+{% extends "common/base.html" %}
+{% block content %}
+  <div class="container">
+    {% for item in news %}
+      <div class="row">
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <small class="text-muted">{{ item.date_posted|date:"F d, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'news-detail' item.id %}">{{ item.title }}</a></h2>
+            <p class="article-content">{{ item.content }}</p>
+          </div>
+        </article>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}

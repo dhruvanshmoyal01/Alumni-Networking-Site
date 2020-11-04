@@ -1,0 +1,20 @@
+{% extends "common/base.html" %}
+{% block content %}
+  <div class="container">
+    {% for post in posts %}
+      <div class="row">
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.subject }}</a></h2>
+            <p class="article-content">{{ post.msg }}</p>
+            <img src="{{ post.pic.url }}">
+          </div>
+        </article>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}

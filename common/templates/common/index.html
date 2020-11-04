@@ -103,6 +103,16 @@
         {% endfor %}
         <a href="{% url 'news-home' %}">View all</a>
       </div>
+      <div class="latest-news">
+        <h4>Events</h4><br/>
+        <hr>
+        {% for item in news %}
+        <p>{{ item.date_posted|date:"F d, Y" }}</p>
+        <p><a href="{% url 'news-detail' item.id %}">{{ item.title }}</a></p>
+        <hr>
+        {% endfor %}
+        <a href="{% url 'news-home' %}">View all</a>
+      </div>
     </div>
   </div>
 </div>
