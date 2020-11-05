@@ -39,6 +39,8 @@ urlpatterns = [
     path('profile_all/<int:pk>/', user_views.ProfileDetailView.as_view(), name = 'profile-detail'),
     path('profile_all/follow/<int:pk>/', user_views.follow, name = 'follow-user'),
     path('profile_all/unfollow/<int:pk>/', user_views.unfollow, name = 'unfollow-user'),
+    path('my_activity/', user_views.myactivity, name = 'my-acivity'),
+
 ]
 
 if settings.DEBUG:

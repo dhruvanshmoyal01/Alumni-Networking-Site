@@ -17,6 +17,8 @@ from django.views.generic import ( ListView,
 from .models import Profile, FollowUser
 from django.db.models import Q
 from django.db.models.query import QuerySet
+from blog.models import Blog
+from post.models import Post
 
 # Create your views here.
 def register(request):
@@ -85,3 +87,11 @@ def unfollow(request, pk):
     FollowUser.objects.filter(profile=user, followed_by=request.user).delete()
     return HttpResponseRedirect('/profile_all')
 
+def myactivity(request):
+    blog = Blog.objects.filter(Q(author = request.user)).order_by("-date_posted")
+    post = Post.objects.filter(Q(author = request.user)).order_by("-date_posted")
+    content = {
+        'blogs' : blog,
+        'posts' : post,
+    }
+    return render(request, 'user/my_activity.html', content)
