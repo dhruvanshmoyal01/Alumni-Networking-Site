@@ -1,20 +1,49 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import News
+from .models import News, Event, UserQuery
 from django.views.generic import ListView, DetailView
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
 	content = {
 		'news' : News.objects.all(),
+		'events' : Event.objects.all(),
 	}
 	return render(request, 'common/index.html', content)
 
 class NewsListView(ListView):
 	model = News
 	template_name = 'common/news.html'
-	context_object_name = 'news'
-	queryset = News.objects.order_by('-date_posted')
+	queryset = News.objects.order_by('date_posted')
+
+	def get_context_data(self, **kwargs):
+		context = ListView.get_context_data(self, **kwargs)
+		context['news'] = News.objects.all().order_by('-date_posted')
+		context['events'] = Event.objects.all().order_by('-date_of_event')
+		return context
 
 class NewsDetailView(DetailView):
 	model = News
+
+
+class EventListView(ListView):
+	model = Event
+	template_name = 'common/events.html'
+	context_object_name = 'events'
+	queryset = Event.objects.order_by('-date_of_event')
+
+class EventDetailView(DetailView):
+	model = Event
+
+def userQuery(request):
+	name = request.POST['name']
+	email = request.POST['email']
+	subject = request.POST['subject']
+	message = request.POST['message']
+	UserQuery.objects.create(name=name, email=email, subject=subject, message=message)
+	messages.success(request, f'Query Recieved!')
+
+	return render(request, 'common/index.html')
+
+	

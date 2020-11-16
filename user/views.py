@@ -17,8 +17,8 @@ from django.views.generic import ( ListView,
 from .models import Profile, FollowUser
 from django.db.models import Q
 from django.db.models.query import QuerySet
-from blog.models import Blog
-from post.models import Post
+from blog.models import Blog, Blog_upvote
+from post.models import Post, Post_upvote
 
 # Create your views here.
 def register(request):
@@ -35,27 +35,81 @@ def register(request):
 
 @login_required
 def profile(request):
-    if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST,
-                                   request.FILES,
-                                   instance=request.user.profile)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Your account has been updated!')
-            return redirect('profile')
+    #if request.method == 'POST':
+    #    u_form = UserUpdateForm(request.POST, instance=request.user)
+    #    p_form = ProfileUpdateForm(request.POST,
+    #                               request.FILES,
+    #                               instance=request.user.profile)
+    #    if u_form.is_valid() and p_form.is_valid():
+    #        u_form.save()
+    #        p_form.save()
+    #        messages.success(request, f'Your account has been updated!')
+    #        return redirect('profile')
+    #
+    #else:
+    #    u_form = UserUpdateForm(instance=request.user)
+    #    p_form = ProfileUpdateForm(instance=request.user.profile)
 
+    #context = {
+    #    'u_form': u_form,
+    #    'p_form': p_form
+    #}
+    blog = Blog.objects.filter(Q(author = request.user)).order_by("-date_posted")
+    posts = Post.objects.filter(Q(author = request.user)).order_by("-date_posted")
+  
+    blog_upvotes = 0
+    post_upvotes = 0
+
+    for p in posts:
+      p.liked = False
+      ob = Post_upvote.objects.filter(post=p, upvote_by=request.user)
+      if ob:
+        p.liked = True
+      upvotes = Post_upvote.objects.filter(post=p)
+      p.upvote_count = upvotes.count()
+      post_upvotes += Post_upvote.objects.filter(post=p).count()
+    
+    followers = FollowUser.objects.filter(Q(profile=request.user.profile)).count()
+    following = FollowUser.objects.filter(Q(followed_by=request.user)).count()
+   
+    for b in blog:
+      blog_upvotes += Blog_upvote.objects.filter(blog=b).count()
+
+    total_upvotes = blog_upvotes+post_upvotes
+    rating = (followers/following)*10
+    context = {
+        'user' : request.user,
+        'blogs' : blog,
+        'posts' : posts,
+        'followers' : followers,
+        'following' : following,
+        'rating' : rating,
+        'total_upvotes' : total_upvotes
+    }
+    return render(request, 'user/profile.html', context)
+
+def profileUpdate(request):
+    if request.method == 'POST':
+      u_form = UserUpdateForm(request.POST, instance=request.user)
+      p_form = ProfileUpdateForm(request.POST,
+                                 request.FILES,
+                                 instance=request.user.profile)
+      if u_form.is_valid() and p_form.is_valid():
+        u_form.save()
+        p_form.save()
+        messages.success(request, f'Your account has been updated!')
+        return redirect('profile')
+    
     else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
+      u_form = UserUpdateForm(instance=request.user)
+      p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
-        'u_form': u_form,
-        'p_form': p_form
+      'u_form': u_form,
+      'p_form': p_form
     }
+    return render(request, 'user/profile_update.html', context)
 
-    return render(request, 'user/profile.html', context)
 
 def follow(request, pk):
     user = Profile.objects.get(pk=pk)

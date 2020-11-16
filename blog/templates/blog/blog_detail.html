@@ -1,36 +1,173 @@
 {% extends "common/base.html" %}
+{% load static %}
 {% block content %}
-  <div class="container">
-    <article class="media content-section">
-      <img class="rounded-circle article-img" src="{{ blog.author.profile.image.url }}">
-      <div class="media-body">
-        <div class="article-metadata">
-          <a class="mr-2" href="#">{{ blog.author }}</a>
-          <small class="text-muted">{{ blog.date_posted|date:"F d, Y" }}</small>
-          {% if blog.author == user %}
-            <div class="ml-3">
-              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog-update' blog.id %}">Update</a>
-              <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'blog-delete' blog.id %}">Delete</a>
-            </div>
+<!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+          <!-- Title -->
+          <h1 class="mt-4">
+            {{ blog.title }}
+          </h1>
+
+          <!-- Author -->
+          <p class="lead">
+            by
+            <a href="#">{{ blog.author }}</a>
+          </p>
+
+          <hr />
+
+          <!-- Date/Time -->
+          <p>{{ blog.date_posted|date:"F d, Y" }}</p>
+
+          <hr />
+
+          <!-- Preview Image -->
+          <img class="img-fluid rounded" src="{% static 'common/images/blog-post.jpg' %}" alt="blog-image" />
+
+          <hr />
+
+          <!-- Post Content -->
+          <p class="lead">
+            {{ blog.content }}
+          </p>
+
+          {% if blog.liked %}
+            <h2><a class="btn btn-danger btn-sm" href="{% url 'blog-devote' blog.id %}">
+              <i class="fa fa-heart"></i> {{ blog.upvote_count }}</a></h2>
+          {% else %}
+            <h2><a class="btn btn-outline-danger btn-sm" href="{% url 'blog-upvote' blog.id %}">
+              <i class="fa fa-heart"></i> {{ blog.upvote_count }}</a></h2>
           {% endif %}
+          
+          <hr/>
+
+          <!-- Comments Form -->
+          <div class="card my-4">
+            <h5 class="card-header">Leave a Comment:</h5>
+            <div class="card-body">
+              <form action="{% url 'blog-comment' blog.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                <input 
+                  type="text" 
+                  name="msg" 
+                  class="form-control" 
+                  rows="3" 
+                  placeholder="Write a comment...">
+                </input>
+                <br>
+                <button class="btn btn-outline-info" type="submit">Post</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+
+          <!-- Single Comment -->
+          {% for comment in blog.comments %}
+            <div class="media mb-4">
+              <img
+                class="d-flex mr-3 rounded-circle"
+                src="{{ comment.commented_by.profile.image.url }}"
+                alt="commeter-image"
+                width="40"
+                height="40"
+              />
+              <div class="media-body">
+                <h5 class="mt-0">{{ comment.commented_by.username }}</h5>
+                {{ comment }}
+              </div>
+            </div>
+          {% endfor %}
         </div>
-        <h2 class="article-title">{{ blog.title }}</h2>
-        <p class="article-content">{{ blog.content }}</p>
-        <h3>Upvoted by {{ blog.upvote_count }}</h3>
-        {% if blog.liked %}
-        <h2><a class="btn btn-danger btn-sm" href="{% url 'blog-devote' blog.id %}">down vote</a></h2>
-        {% else %}
-        <h2><a class="btn btn-primary btn-sm" href="{% url 'blog-upvote' blog.id %}">upvote</a></h2>
-        {% endif %}
-        <form action="{% url 'blog-comment' blog.id %}" method="POST">
-          {% csrf_token %}
-          <input type="text" name="msg" placeholder="Write a comment">
-          <button class="btn btn-outline-info" type="submit">Post</button>
-        </form>
-        {% for comment in blog.comments %}
-          <p>{{ comment }}</p>
-        {% endfor %}
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+          <br>
+          <div class="text-center mx-auto">
+            <!-- Avatar -->
+            <img src="{{ request.user.profile.image.url }}" class="rounded-circle" width="200" height="200">
+            <!-- Content -->
+            <div class="card-body">
+            <!-- Name -->
+              <h4 class="card-title font-weight-bold">{{ request.user.username }}</h4>
+              <hr>
+              <!-- Quotation -->
+              <p>
+                <i class="fa fa-quote-left fa-x" ></i>  
+                  {{ request.user.profile.description }}
+                <i class="fa fa-quote-right fa-x"></i>
+              </p>
+            </div>
+          </div>
+
+          <!-- Categories Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Categories</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="{% url 'blog-tag' 'web-design' %}">Web Design</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'blog-tag' 'html' %}">HTML</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'blog-tag' 'freebies' %}">Freebies</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-lg-6">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="{% url 'blog-tag' 'js' %}">JavaScript</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'blog-tag' 'css' %}">CSS</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'blog-tag' 'tutorials' %}">Tutorials</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Side Widget -->
+          {% if blog.author == user %}
+            <div class="card my-4">
+              <h5 class="card-header">Blog</h5>
+              <div class="card-body" style="text-align: center">
+                <a
+                  href="{% url 'blog-update' blog.id %}"
+                  class="btn btn-outline-primary btn-lg"
+                  role="button"
+                  aria-pressed="true"
+                  style="width: 50%"
+                  >Update</a
+                >
+                <br><br>
+                <a
+                  href="{% url 'blog-delete' blog.id %}"
+                  class="btn btn-danger btn-lg"
+                  role="button"
+                  aria-pressed="true"
+                  style="width: 50%"
+                  >Delete</a
+                >
+              </div>
+            </div>  
+          {% endif %}
+          
+          </div>
       </div>
-    </article>
-  </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
 {% endblock content %}
+

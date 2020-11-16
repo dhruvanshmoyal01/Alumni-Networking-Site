@@ -1,14 +1,36 @@
 {% extends "common/base.html" %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'common/customcss/index_style.css' %}">
+{% endblock style %}
 {% block content %}
-  <div class="container">
-    <article class="media content-section">
-      <div class="media-body">
-        <div class="article-metadata">
-          <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+<!-- Page Content -->
+  <div class="main-area">
+    <div class="container">
+      <div class="row">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+          <!-- Title -->
+          <h1 class="mt-4">
+            {{ object.title }}
+          </h1>
+          <hr />
+          <!-- Date/Time -->
+          <p>Posted on {{ object.date_posted|date:"F d, Y" }}</p>
+          <hr />
+          <!-- Preview Image -->
+          <img class="img-fluid rounded" src="{% static 'common/images/blog-post.jpg' %}" alt="" />
+          <hr />
+          <!-- Post Content -->
+          <p>
+            {{ object.content }}
+          </p>
         </div>
-        <h2 class="article-title">{{ object.title }}</h2>
-        <p class="article-content">{{ object.content }}</p>
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+          
+        </div>
       </div>
-    </article>
+    </div>
   </div>
 {% endblock content %}

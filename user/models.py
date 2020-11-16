@@ -11,7 +11,7 @@ class Profile(models.Model):
 	phone_number = models.CharField(validators = [RegexValidator("^0?[5-9]{1}\d{9}$")], max_length = 15, null = True, blank = True)
 	description = models.TextField(null = True, blank = True)
 	address = models.TextField(max_length=200, null=True, blank=True)
-	status = models.CharField(max_length=20, default='employee', choices=(('Employee', 'Employee'), ('Freelancer', 'Freelancer'), ('Entreprenur', 'Entreprenur')))
+	status = models.CharField(max_length=20, default='student', choices=(('Employee', 'Employee'), ('Freelancer', 'Freelancer'), ('Entreprenur', 'Entreprenur'), ('Student', 'Student'), ('Professor', 'Professor')))
 	gender = models.CharField(max_length=20, default='male', choices=(('male', 'male'), ('female', 'female'), ('other', 'other')))
 
 	def __str__(self):

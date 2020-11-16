@@ -1,18 +1,56 @@
 {% extends "common/base.html" %}
+{% load static %}
+{% block style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'common/customcss/index_style.css' %}">
+{% endblock style %}
 {% block content %}
-  <div class="container">
-    {% for item in news %}
+    <!-- Page Content -->
+    <div class="main-area">
+    <div class="container">
       <div class="row">
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-              <small class="text-muted">{{ item.date_posted|date:"F d, Y" }}</small>
+        <!-- News Entries Column -->
+        <div class="col-md-8">
+          <h1 class="my-4"></h1>
+          <!-- News Post -->
+          {% for item in news %}
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title"><a href="{% url 'news-detail' item.id %}">{{ item.title }}</a></h2>
+              <p class="card-text">
+                {{ item.content }}
+              </p>
+              <a href="{% url 'news-detail' item.id %}" class="btn btn-primary">> Continue reading &rarr;</a>
             </div>
-            <h2><a class="article-title" href="{% url 'news-detail' item.id %}">{{ item.title }}</a></h2>
-            <p class="article-content">{{ item.content }}</p>
+            <div class="card-footer text-muted">Updated on {{ item.date_posted|date:"F d, Y" }}</div>
           </div>
-        </article>
+          {% endfor %}
+
+          <!-- Pagination -->
+          <ul class="pagination justify-content-center mb-4">
+            <li class="page-item">
+              <a class="page-link" href="#">&larr; Older</a>
+            </li>
+            <li class="page-item disabled">
+              <a class="page-link" href="#">Newer &rarr;</a>
+            </li>
+          </ul>
+        </div>
+        <!-- Sidebar Widgets Column -->
+        <div class="col-lg-3">
+          <div class="latest-news">
+            <h4>Events</h4><br/>
+            <hr>
+            {% for item in events %}
+            <p>{{ item.date_of_event|date:"F d, Y" }}</p>
+            <p><a href="{% url 'events-detail' item.id %}">{{ item.title }}</a></p>
+            <hr>
+            {% endfor %}
+          </div>
+        </div>
       </div>
-    {% endfor %}
-  </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    </div>
 {% endblock content %}
+

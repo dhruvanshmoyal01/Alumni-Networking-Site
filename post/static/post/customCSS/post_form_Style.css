@@ -1,0 +1,41 @@
+body {
+  background-color: #e4f1f7 !important;
+}
+.add-on a {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #007bff;
+  border-radius: 50px;
+  text-align: center;
+}
+.add-on a i {
+  padding: 18px 11px;
+  font-size: 20px;
+  color: #007bff;
+}
+.add-on a:hover {
+  background: #e4f1f7;
+}
+.add-on a:hover i {
+  color: #007bff;
+}
+.add-on a i::before {
+  display: inline-block;
+  text-decoration: none;
+}
+#btn {
+  display: inline-block;
+  vertical-align: top;
+}
+.name {
+  color: #007bff;
+}
+.container {
+  margin-top: 10px;
+  border: 4px #e4f1f7 solid;
+  background-color: white;
+  padding-block-end: 2%;
+  padding-block-start: 2%;
+  width: 100px;
+}

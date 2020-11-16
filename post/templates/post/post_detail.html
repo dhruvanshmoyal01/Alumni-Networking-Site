@@ -1,37 +1,180 @@
 {% extends "common/base.html" %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'common/customcss/index_style.css' %}">
+{% endblock style %}
 {% block content %}
-  <div class="container">
-    <article class="media content-section">
-      <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
-      <div class="media-body">
-        <div class="article-metadata">
-          <a class="mr-2" href="#">{{ post.author }}</a>
-          <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
-          {% if post.author == user %}
-            <div class="ml-3">
-              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id %}">Update</a>
-              <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Delete</a>
+    <div class="main-area">
+    <br>
+    <!-- Page Content -->
+    <div class="container ">
+        <div class="row">
+            <!-- Post Entries Column -->
+            <div class="col-md-8">
+                <div class="box">
+                  <div class="d-flex flex-column fundraing-pojects comment-section">
+                    <div class="bg-white p-2">
+                      <div class="d-flex flex-row user-info">
+                        <img
+                          class="rounded-circle"
+                          src="{{ post.author.profile.image.url }}"
+                          width="60"
+                          height="60"
+                        />
+                        <div class="d-flex flex-column justify-content-start ml-2">
+                          <span class="d-block font-weight-bold name"
+                            >{{ post.author }}</span
+                          ><span class="date text-black-50"
+                            >Shared publicly - {{ post.date_posted|date:"F d, Y" }}</span
+                          >
+                        </div>
+                      </div>
+                      <div class="mt-2">
+                        <p class="comment-text">
+                          {{ post.msg }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="card" style=" width: 45.3.3.5rem">
+                      <img
+                        src="{{ post.pic.url }}"
+                        class="card-img-top"
+                        alt="Post Unavailable"
+                      />
+                    </div>
+                    <div class="bg-white">
+                      <div class="d-flex flex-row fs-12">
+                        {% if post.liked %}
+                          <h2 class="mr-3"><a class="btn btn-danger btn-sm" href="{% url 'post-devote' post.id %}">
+                            <i class="fa fa-heart"></i> {{ post.upvote_count }}</a></h2>
+                        {% else %}
+                          <h2 class="mr-3">
+                            <a class="btn btn-outline-danger btn-sm" href="{% url 'post-upvote' post.id %}">
+                              <i class="fa fa-heart"></i> 
+                                {{ post.upvote_count }}
+                            </a>
+                          </h2>
+                        {% endif %}
+                      </div>
+                    </div>
+                  <hr/>
+                  </div>
+
+                <!-- Comments Form -->
+                <div class="card my-2">
+                  <h5 class="card-header">Leave a Comment:</h5>
+                  <div class="card-body">
+                    <form action="{% url 'post-comment' post.id %}" method="POST">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <input 
+                          type="text" 
+                          name="msg" 
+                          class="form-control" 
+                          rows="3" 
+                          placeholder="Write a comment...">
+                        </input>
+                        <br>
+                        <button class="btn btn-outline-info" type="submit">Post</button>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- Single Comment -->
+                  {% for comment in post.comments %}
+                    <div class="media mb-4">
+                      <img
+                        class="d-flex mr-3 rounded-circle"
+                        src="{{ comment.commented_by.profile.image.url }}"
+                        alt="commeter-image"
+                        width="60"
+                        height="60"
+                      />
+                      <div class="media-body">
+                        <h5 class="mt-0 mr">{{ comment.commented_by.username }}</h5>
+                        {{ comment.msg }}
+                      </div>
+                    </div>
+                  {% endfor %}
+                  </div>
+                </div>
+                <!-- Post -->
+
+
             </div>
-          {% endif %}
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
+              <div class="text-center mx-auto">
+                <!-- Avatar -->
+                <img src="{{ post.author.profile.image.url }}" class="rounded-circle" width="200" height="200">
+                <!-- Content -->
+                <div class="card-body">
+                    <!-- Name -->
+                    <h4 class="card-title font-weight-bold">{{ post.author }}</h4>
+                    <hr>
+                    <!-- Quotation -->
+                    <p>
+                      <i class="fa fa-quote-left fa-x" ></i>  
+                        {{ post.author.profile.description }}
+                      <i class="fa fa-quote-right fa-x"></i>
+                    </p>
+                </div>
+              </div>
+              <!-- Side Widget -->
+                {% if post.author == user %}
+                  <div class="card my-4">
+                    <h5 class="card-header">Post</h5>
+                    <div class="card-body" style="text-align: center">
+                      <a
+                        href="{% url 'post-update' post.id %}"
+                        class="btn btn-outline-primary btn-lg"
+                        role="button"
+                        aria-pressed="true"
+                        style="width: 50%"
+                        >Update</a
+                      >
+                      <br><br>
+                      <a
+                        href="{% url 'post-delete' post.id %}"
+                        class="btn btn-danger btn-lg"
+                        role="button"
+                        aria-pressed="true"
+                        style="width: 50%"
+                        >Delete</a
+                      >
+                    </div>
+                  </div>  
+                {% endif %}
+                <!-- Widget -->
+                <h5 class="card-title font-weight-bold">Credentials & Highlights</h5>
+                <hr>
+                <p>General Manager at Sports Ecommerce</p>
+                <p>Lives in Atlanta, GA</p>
+                <p>27.2M content views</p>
+                <br />
+                <!-- Categories Widget -->
+                <div class="card my-4 text-center">
+                    <h5 class="card-header">Knows about</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="#">Web Design</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">HTML</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Freebies</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h2 class="article-title">{{ post.subject }}</h2>
-        <p class="article-content">{{ post.msg }}</p>
-        <img src="{{ post.pic.url }}">
-        <h3>Upvoted by {{ post.upvote_count }}</h3>
-        {% if post.liked %}
-        <h2><a class="btn btn-danger btn-sm" href="{% url 'post-devote' post.id %}">down vote</a></h2>
-        {% else %}
-        <h2><a class="btn btn-primary btn-sm" href="{% url 'post-upvote' post.id %}">upvote</a></h2>
-        {% endif %}
-        <form action="{% url 'post-comment' post.id %}" method="POST">
-          {% csrf_token %}
-          <input type="text" name="msg" placeholder="Write a comment">
-          <button class="btn btn-outline-info" type="submit">Post</button>
-        </form>
-        {% for comment in post.comments %}
-          <p>{{ comment }}</p>
-        {% endfor %}
-      </div>
-    </article>
-  </div>
+    </div>
+</div>
 {% endblock content %}
+

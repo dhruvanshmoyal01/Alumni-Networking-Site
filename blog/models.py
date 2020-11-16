@@ -9,6 +9,8 @@ class Blog(models.Model):
 	content = models.TextField()
 	date_posted = models.DateTimeField(default = timezone.now)
 	author = models.ForeignKey(User, on_delete = models.CASCADE)
+	tag = models.CharField(max_length=20, null=True, blank=True, choices=(('web-design', 'web-design'), ('html', 'html'), ('css', 'css'), ('freebies', 'freebies'), ('tutorials', 'tutorials')))
+	cover_pic = models.ImageField(upload_to='blog-cover', default='blog-post.jpg')
 
 	def __str__(self):
 		return self.title

@@ -33,13 +33,13 @@ class PostListView(ListView):
 		if q == None:
 			q = ""
 		posts = Post.objects.filter(Q(author__in = followedList2)).order_by("-date_posted")
-		#for p in blogs:
-		#	p.liked = False
-		#	ob = Blog_upvote.objects.filter(blog=p, upvote_by=self.request.user)
-		#	if ob:
-		#		p.liked = True
-		#	upvotes = Blog_upvote.objects.filter(blog=p)
-		#	p.upvote_count = upvotes.count()	
+		for p in posts:
+			p.liked = False
+			ob = Post_upvote.objects.filter(post=p, upvote_by=self.request.user)
+			if ob:
+				p.liked = True
+			upvotes = Post_upvote.objects.filter(post=p)
+			p.upvote_count = upvotes.count()	
 		context["posts"] = posts
 		return context
 
@@ -61,7 +61,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
 	model = Post
-	fields = ['subject', 'msg', 'pic']
+	fields = ['caption', 'pic']
 
 	def form_valid(self, form):
 		form.instance.author = self.request.user
@@ -69,7 +69,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = Post
-	fields = ['subject', 'msg', 'pic']
+	fields = ['caption', 'pic']
 
 	def form_valid(self, form):
 		form.instance.author = self.request.user
@@ -93,7 +93,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 def upvote(self, pk):
 	post = Post.objects.get(pk=pk)
-	Post_upvote.objects.create(post=post, upvote_by=self.user)
+	Post_upvote.objects.create(post=post, upvote_by=self.user) 
 	return HttpResponseRedirect('/posts/post/{}'.format(pk))
 
 def devote(self, pk):

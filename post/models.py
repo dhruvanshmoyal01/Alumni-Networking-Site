@@ -7,13 +7,12 @@ from django.urls import reverse
 # Create your models here.
 class Post(models.Model):
 	pic = models.ImageField(upload_to='post_pic')
-	subject = models.CharField(max_length=200)
-	msg = models.TextField(null=True, blank=True)
+	caption = models.TextField(null=True, blank=True)
 	date_posted = models.DateTimeField(default = timezone.now)
 	author = models.ForeignKey(User, on_delete = models.CASCADE)
 
 	def __str__(self):
-		return self.subject
+		return self.author.username
 
 	def get_absolute_url(self):
 		return reverse('post-detail', kwargs={'pk':self.pk})
@@ -26,7 +25,7 @@ class Post_comment(models.Model):
 	flag = models.CharField(max_length=20, null=True, blank=True, choices=(('abusive', 'abusive'), ('inappropriate', 'inappropriate'), ('other', 'other')))
 
 	def __str__(self):
-		return self.msg
+		return self.commented_by.username
 
 class Post_upvote(models.Model):
 	post = models.ForeignKey(to=Post, on_delete=models.CASCADE)

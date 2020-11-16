@@ -1,20 +1,109 @@
 {% extends "common/base.html" %}
+{% load static %}
+{% block style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'common/customcss/index_style.css' %}">
+{% endblock style %}
 {% block content %}
-  <div class="container">
-    {% for post in posts %}
+  <div class="main-area">  
+    <!-- Page Content -->
+    <br>
+    <div class="container">
       <div class="row">
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="#">{{ post.author }}</a>
-              <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+        <!-- Post Entries Column -->
+        <div class="col-md-8">
+          {% for post in posts %}
+          <div class="box">
+            <div class="d-flex flex-column comment-section">
+              <div class="bg-white p-2">
+                <div class="d-flex flex-row user-info">
+                  <img
+                    class="rounded-circle"
+                    src="{{ post.author.profile.image.url }}"
+                    width="60"
+                    height="60"
+                  />
+                  <div class="d-flex flex-column justify-content-start ml-2">
+                    <span class="d-block font-weight-bold name"
+                      >{{ post.author }}</span
+                    ><span class="date text-black-50"
+                      >Shared publicly - {{ post.date_posted|date:"F d, Y" }}</span
+                    >
+                  </div>
+                </div>
+                <div class="mt-2">
+                  <p class="comment-text">
+                    {{ post.msg }}
+                  </p>
+                </div>
+              </div>
+              <div class="card" style=" width: 45.3.3.5rem">
+                <img
+                  src="{{ post.pic.url }}"
+                  class="card-img-top"
+                  alt="Post Unavailable"
+                />
+              </div>
+              <div class="bg-white">
+                <div class="d-flex flex-row fs-12">
+                  <div class="like p-2 cursor">
+                    {% if post.liked %}
+                      <a class="btn btn-danger btn-sm" href="{% url 'post-devote' post.id %}">
+                        <i class="fa fa-heart"></i> {{ post.upvote_count }} <span class="ml-1"></span>
+                      </a>
+                    {% else %}
+                      <a class="btn btn-outline-danger btn-sm" href="{% url 'post-upvote' post.id %}">
+                        <i class="fa fa-heart"></i> {{ post.upvote_count }} <span class="ml-1"></span>
+                      </a>
+                    {% endif %}
+                  </div>
+                  <div class="like p-2 cursor">
+                    <a href="{% url 'post-detail' post.id %}" class="">
+                      <i class="fa fa-commenting-o"></i>
+                      <span class="ml-1">Comment</span>
+                    </a>
+                  </div>
+                  <div class="like p-2 cursor">
+                    <a href="{% url 'post-detail' post.id %}" class="">See More &rarr;</a>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.subject }}</a></h2>
-            <p class="article-content">{{ post.msg }}</p>
-            <img src="{{ post.pic.url }}">
+            <hr />
           </div>
-        </article>
+          {% endfor %}
+          <!-- Post -->
+          <!-- Pagination -->
+          <br>
+          <ul class="pagination justify-content-center mb-4">
+            <li class="page-item">
+              <a class="page-link" href="#">&larr; Older</a>
+            </li>
+            <li class="page-item disabled">
+              <a class="page-link" href="#">Newer &rarr;</a>
+            </li>
+          </ul>
+        </div>
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+          <div class="card my-4">
+            <h5 class="card-header">Start a post</h5>
+            <div class="card-body" style="text-align: center">
+              <a
+                href="{% url 'post-create' %}"
+                class="btn btn-primary btn-lg active"
+                role="button"
+                aria-pressed="true"
+                style="width: 50%"
+                >Create</a
+              >
+            </div>
+          </div>
+        </div>
       </div>
-    {% endfor %}
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
   </div>
 {% endblock content %}
+
+

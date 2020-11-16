@@ -1,0 +1,57 @@
+{% extends "common/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'user/customcss/profile_page_style.css' %}">
+{% endblock style %}
+
+{% block content %}
+    <!-- Page Content -->
+    <div class="text-center mx-auto mt-3">
+        <!-- Avatar -->
+        <img src="{{ user.profile.image.url }}" class="rounded-circle" width="200" height="200">
+        <!-- Content -->
+        <div class="card-body">
+            <!-- Name -->
+            <h4 class="card-title font-weight-bold">{{ user.username }}</h4>
+            <!-- Quotation -->
+            <p><i class="fa fa-quote-left"></i> 
+              {{ user.profile.description }}
+              <i class="fa fa-quote-right"></i>
+            </p>
+            <hr>
+        </div>
+    </div>
+    <div class="container">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-8">
+                <!-- Material form login -->
+                <div class="card">
+                    <h5 class="card-header info-color white-text text-center py-4">
+                        <strong>Profile Information</strong>
+                    </h5>
+                    <br />
+                    <!--Card content-->
+                    <div class="card-body px-lg-5 pt-0">
+                        <!-- Form -->
+                        <div class="box">
+                            <div class="d-flex justify-content-center text-center">
+                                <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <fieldset class="form-group">
+                                        <legend class="border-bottom mb-4">Profile Info</legend>
+                                        {{ u_form|crispy }}
+                                        {{ p_form|crispy }}
+                                    </fieldset>
+                                    <div class="form-group">
+                                        <button class="btn btn-outline-info" type="submit">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+{% endblock content %}

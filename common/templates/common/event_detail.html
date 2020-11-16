@@ -1,0 +1,111 @@
+{% extends "common/base.html" %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'common/customcss/event_detail.css' %}">
+{% endblock style %}
+{% block content %}
+  <!-- ======= Intro Section ======= -->
+  <section id="intro">
+    <div class="intro-container" data-aos="zoom-in" data-aos-delay="100">
+      <h1 class="mb-4 pb-0"><span>{{ object.title }}</span></h1>
+      <p class="mb-4 pb-0">{{ object.date_of_event }}, {{ object.venue }}</p>
+      <!-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> -->
+      <a href="#about" class="about-btn scrollto">About The Event</a>
+    </div>
+  </section>
+  <!-- End Intro Section -->
+    <!-- ======= About Section ======= -->
+    <section id="about">
+        <div class="container my-4" data-aos="fade-up">
+          <div class="row">
+            <div class="col-lg-6">
+              <h2>About The Event</h2>
+              <p>{{ object.content }}</p>
+            </div>
+            <div class="col-lg-3">
+              <h3>Where</h3>
+              <p>{{ object.venue }}</p>
+            </div>
+            <div class="col-lg-3">
+              <h3>When</h3>
+              <p>{{ object.date_of_event|date:"F d, Y" }}<br>{{ object.time }}</p>
+            </div>
+          </div>
+        </div>
+    </section>
+    <!-- End About Section -->
+    <!-- ======= Contact Section ======= -->
+    <div class="album py-5 bg-light">
+    <section id="contact" class="section-bg">
+
+            <div class="container" data-aos="fade-up">
+      
+              <div class="section-header">
+                <h2>Contact Us</h2>
+              </div>
+      
+              <div class="row contact-info">
+      
+                <div class="col-md-4">
+                  <div class="contact-address">
+                    <i class="ion-ios-location-outline"></i>
+                    <h3>Address</h3>
+                    <address>AB Rd, Pigdamber, Rau, Indore, Madhya Pradesh 453331</address>
+                  </div>
+                </div>
+      
+                <div class="col-md-4">
+                  <div class="contact-phone">
+                    <i class="ion-ios-telephone-outline"></i>
+                    <h3>Phone Number</h3>
+                    <p><a href="tel:+155895548855">+91 {{ object.phone_number }}</a></p>
+                  </div>
+                </div>
+      
+                <div class="col-md-4">
+                  <div class="contact-email">
+                    <i class="ion-ios-email-outline"></i>
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@example.com">{{ object.email }}</a></p>
+                  </div>
+                </div>
+      
+              </div>
+      
+              <div class="form">
+                <form action="{% url 'user-query' %}" method="POST" role="form" class="php-email-form">
+                  {% csrf_token %}
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                      <div class="validate"></div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                      <div class="validate"></div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                    <div class="validate"></div>
+                  </div>
+                  <div class="form-group">
+                    <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                    <div class="validate"></div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="loading">Loading</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">Your message has been sent. Thank you!</div>
+                  </div>
+                  <div class="text-center"><button type="submit">Send Message</button></div>
+                </form>
+              </div>
+      
+            </div>
+        </section>
+        <!-- End Contact Section -->
+    </div>
+
+{% endblock content %}
+

@@ -1,18 +1,41 @@
 {% extends "common/base.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'post/customCSS/post_form_Style.css' %}">
+{% endblock style %}
 {% block content %}
-  <div class="container">
-    <div class="content-section">
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Create Post</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Post</button>
+    <div class="container">
+      <div class="d-flex justify-content-center row">
+        <div class="col-md-8">
+          <div class="d-flex flex-column comment-section">
+            <div class="p-2">
+              <div class="d-flex flex-row user-info">
+                <img
+                  class="rounded-circle"
+                  src="{{ request.user.profile.image.url }}"
+                  width="50"
+                  height="50"
+                />
+                <div class="d-flex flex-column justify-content-start ml-2">
+                  <span class="d-block font-weight-bold name"
+                    >{{ request.user.username }}</span
+                  >
+                </div>
+              </div>
             </div>
-        </form>
+            <form class="border-class" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <fieldset class="form-group">
+                  {{ form|crispy }}
+              </fieldset>
+              <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Post</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 {% endblock content %}
+    <!------------------------------------------------ header section -------------------------------------------------->
