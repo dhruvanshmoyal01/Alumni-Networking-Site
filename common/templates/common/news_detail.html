@@ -19,7 +19,7 @@
           <p>Posted on {{ object.date_posted|date:"F d, Y" }}</p>
           <hr />
           <!-- Preview Image -->
-          <img class="img-fluid rounded" src="{% static 'common/images/blog-post.jpg' %}" alt="" />
+          <img class="img-fluid rounded" src="{{ object.pic.url }}" alt="new-image" />
           <hr />
           <!-- Post Content -->
           <p>

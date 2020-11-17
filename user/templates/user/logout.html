@@ -1,9 +1,17 @@
 {% extends "common/Base.html" %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'user/customcss/logout_style.css' %}">
+{% endblock style %}
 {% block content %}
-	<h2>You have been logged out!</h2>
-	<div class="border-top pt-3">
-		<small class="text-muted">
-			<a class="ml-2" href="{% url 'login' %}">Log In Again</a>
+<section>
+  <div class="container">
+  	<h1 class="heading">You have been logged out!</h1>
+  </div>
+  <div class="lower"> 
+		<small class="text-muted center">
+			<a href="{% url 'login' %}">Log In Again</a>
 		</small>
-	</div>
+  </div>
+</section>
 {% endblock content %}

@@ -55,7 +55,7 @@ class PostDetailView(DetailView):
 			o.liked = True
 		upvotes = Post_upvote.objects.filter(post=o)
 		o.upvote_count = upvotes.count()
-		o.comments = Post_comment.objects.filter(post=o)
+		o.comments = Post_comment.objects.filter(post=o).order_by('-date_posted')
 		context['post'] = o
 		return context
 

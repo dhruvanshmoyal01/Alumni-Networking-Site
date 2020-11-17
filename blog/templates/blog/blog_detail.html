@@ -25,7 +25,7 @@
           <hr />
 
           <!-- Preview Image -->
-          <img class="img-fluid rounded" src="{% static 'common/images/blog-post.jpg' %}" alt="blog-image" />
+          <img class="img-fluid rounded" src="{{ blog.cover_pic.url }}" alt="blog-image" />
 
           <hr />
 
@@ -68,7 +68,7 @@
 
           <!-- Single Comment -->
           {% for comment in blog.comments %}
-            <div class="media mb-4">
+            <div class="media mb-3 ml-5">
               <img
                 class="d-flex mr-3 rounded-circle"
                 src="{{ comment.commented_by.profile.image.url }}"
@@ -97,7 +97,7 @@
               <!-- Quotation -->
               <p>
                 <i class="fa fa-quote-left fa-x" ></i>  
-                  {{ request.user.profile.description }}
+                  {{ request.user.profile.bio }}
                 <i class="fa fa-quote-right fa-x"></i>
               </p>
             </div>

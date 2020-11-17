@@ -14,14 +14,22 @@
             <div class="profile-nav-info">
                 <h3 class="user-name">{{ user.username }}</h3>
                 <div class="user-bio">
-                    <span class="bio">{{ user.profile.description }}</span>
+                    <span class="bio">{{ user.profile.bio }}</span>
                 </div>
             </div>
+            {% if user == request.user %}
             <div class="profile-option">
                 <div class="notification">
                     <a href="{% url 'profile-update' %}"><i class="fa fa-wrench"></i></a>
                 </div>
             </div>
+            {% else %}
+            <div class="profile-option">
+                <div class="notification">
+                    <a href="{% url 'follow-user' %}"><i class="fa fa-plus"></i></a>
+                </div>
+            </div>
+            {% endif %}
         </div>
         <div class="main-bd">
             <div class="left-side">
@@ -41,7 +49,9 @@
                     </div>
                     <div class="profile-btn">
                         <button class="chatbtn">
-                            <i class="fa fa-comment"></i>email
+                            <a href="mailto:{{ user.email }}" style="color: #fff">
+                              <i class="fa fa-comment"></i>email
+                            </a>
                         </button>
                     </div>
                     <p class="user-mail"><i class="fa fa-users"></i>{{ followers }} followers</p>
@@ -50,16 +60,16 @@
                         <h3 class="rating">{{ rating }}</h3>
                         <div class="rate">
                             <i class="fa fa-star"></i>
-                            {% if total_upvotes > 1 %}
-                              <i class="fa fa-star"></i>
-                            {% endif %}
-                            {% if total_upvotes > 2 %}
-                              <i class="fa fa-star"></i>
-                            {% endif %}
                             {% if total_upvotes > 5 %}
                               <i class="fa fa-star"></i>
                             {% endif %}
                             {% if total_upvotes > 10 %}
+                              <i class="fa fa-star"></i>
+                            {% endif %}
+                            {% if total_upvotes > 25 %}
+                              <i class="fa fa-star"></i>
+                            {% endif %}
+                            {% if total_upvotes > 100 %}
                               <i class="fa fa-star"></i>
                             {% endif %}
                         </div>

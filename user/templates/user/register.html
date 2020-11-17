@@ -1,8 +1,16 @@
 {% extends "common/base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
+{% block style %}
+	<link rel="stylesheet" type="text/css" href="{% static 'user/customcss/login_style.css' %}">
+{% endblock style %}
 {% block content %}
+	<img class="wave" src="{% static 'user/resources/wave.png' %}" alt="wave  png">
 	<div class="container">
-		<div class="content-section">
+		<div class="img">
+			<img src="{% static 'user/resources/bg.svg' %}" alt="bg svg">
+		</div>
+		<div class="login-content">
 			<form method="POST">
 				{% csrf_token %}
 				<fieldset class="form-group">
@@ -10,14 +18,13 @@
 					{{ form|crispy }}
 				</fieldset>
 				<div class="form-group">
-					<button class="btn btn-outline-info" type="submit">Sign Up</button>
+					<button class="btn btn-outline-info" type="submit">Log In</button>
 				</div>
-			</form>
-			<div class="border-top pt-3">
 				<small class="text-muted">
-					Already have an account? <a class="ml-2" href="#">Sign In</a>
+					Already have an account? <br> <a class="ml-2" href="#">Sign In</a>
 				</small>
-			</div>
-		</div>
-	</div>
+			</form>
+    </div>
+  </div>
+  <script type="text/javascript" src="{% static 'user/customjs/login_script.js' %}"></script>
 {% endblock content %}

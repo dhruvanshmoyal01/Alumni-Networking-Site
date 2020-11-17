@@ -31,7 +31,7 @@
                       </div>
                       <div class="mt-2">
                         <p class="comment-text">
-                          {{ post.msg }}
+                          {{ post.caption }}
                         </p>
                       </div>
                     </div>
@@ -55,6 +55,12 @@
                             </a>
                           </h2>
                         {% endif %}
+                        <div class="like p-2 cursor">
+                          <a href="{% url 'post-detail' post.id %}" class="">
+                            <i class="fa fa-commenting-o"></i>
+                            <span class="ml-1">Comment</span>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   <hr/>
@@ -76,12 +82,13 @@
                         </input>
                         <br>
                         <button class="btn btn-outline-info" type="submit">Post</button>
+                        <hr>
                       </div>
                     </form>
                   </div>
                   <!-- Single Comment -->
                   {% for comment in post.comments %}
-                    <div class="media mb-4">
+                    <div class="media mb-3 ml-5">
                       <img
                         class="d-flex mr-3 rounded-circle"
                         src="{{ comment.commented_by.profile.image.url }}"
@@ -90,7 +97,7 @@
                         height="60"
                       />
                       <div class="media-body">
-                        <h5 class="mt-0 mr">{{ comment.commented_by.username }}</h5>
+                        <h5 class="mt-0">{{ comment.commented_by.username }}</h5>
                         {{ comment.msg }}
                       </div>
                     </div>
@@ -114,7 +121,7 @@
                     <!-- Quotation -->
                     <p>
                       <i class="fa fa-quote-left fa-x" ></i>  
-                        {{ post.author.profile.description }}
+                        {{ post.author.profile.bio }}
                       <i class="fa fa-quote-right fa-x"></i>
                     </p>
                 </div>
@@ -144,34 +151,6 @@
                     </div>
                   </div>  
                 {% endif %}
-                <!-- Widget -->
-                <h5 class="card-title font-weight-bold">Credentials & Highlights</h5>
-                <hr>
-                <p>General Manager at Sports Ecommerce</p>
-                <p>Lives in Atlanta, GA</p>
-                <p>27.2M content views</p>
-                <br />
-                <!-- Categories Widget -->
-                <div class="card my-4 text-center">
-                    <h5 class="card-header">Knows about</h5>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">Web Design</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">HTML</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Freebies</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

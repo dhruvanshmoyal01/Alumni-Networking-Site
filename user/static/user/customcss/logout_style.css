@@ -1,0 +1,43 @@
+{% load static %}
+section{
+	padding: 10rem 0;
+	background-color: #fff;
+}
+
+.heading{
+	text-transform: uppercase;
+	font-size: 3.5rem;
+	letter-spacing: 3px;
+	margin-right: -3px;
+	margin-bottom: 5rem;
+	text-align: center;
+	color: #333;
+	position: relative;
+}
+
+.heading::after{
+	content: "";
+	width: 10rem;
+	height: 0.8rem;
+	background-color: #45e19f;
+	position: absolute;
+	bottom: -2rem;
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: 2rem;
+}
+
+.lower{
+	text-transform: uppercase;
+	font-size: 1.8rem;
+	letter-spacing: 3px;
+	text-align: center;
+	color: #333;
+	position: relative;
+}
+
+.lower small a{
+	margin: 0 auto!important;
+  display: flex!important;
+  justify-content: center!important;
+}

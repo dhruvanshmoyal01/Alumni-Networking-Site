@@ -1,19 +1,29 @@
 {% extends "common/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'user/customcss/profile_list_style.css' %}">
+{% endblock style %}
 {% block content %}
-  <div class="container">
-    {% for p in profile %}
-      <div class="row">
-        <article class="media content-section">
-          <div class="media-body">
-            <h2><a class="article-title" href="{% url 'profile-detail' p.id %}">{{ p.user }}</a></h2>
+    <section>
+      <div class="container">
+        <h1 class="heading">User Profiles</h1>
+        <div class="card-wrapper">
+          {% for p in profile %}
+          <div class="card">
+            <img src="{% static 'user/resources/card-bg.jpg' %}" alt="card background" class="card-img">
+            <img src="{{ p.user.profile.image.url }}" alt="profile image" class="profile-img">
+            <h1><a class="article-title" href="{% url 'profile-detail' p.id %}">{{ p.user }}</a></h1>
+            <p class="job-title">{{ p.user.profile.status }}</p>
+            <p class="about">{{ p.user.profile.bio }}</p>
             {% if p.followed %}
-            <h2><a class="btn btn-danger btn-sm" href="{% url 'unfollow-user' p.id %}">UnFollow</a></h2>
+              <h2><a class="btn btn-danger btn-sm" href="{% url 'unfollow-user' p.id %}">UnFollow</a></h2>
             {% else %}
-            <h2><a class="btn btn-primary btn-sm" href="{% url 'follow-user' p.id %}">Follow</a></h2>
+              <h2><a class="btn btn-primary btn-sm" href="{% url 'follow-user' p.id %}">Follow</a></h2>
             {% endif %}
-          </div>
-        </article>
+            </div>
+          {% endfor %}
+        </div>
       </div>
-    {% endfor %}
-  </div>
+    </section>
 {% endblock content %}

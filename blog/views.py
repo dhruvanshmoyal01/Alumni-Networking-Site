@@ -69,7 +69,7 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 
 class BlogUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = Blog
-	fields = ['title', 'content']
+	fields = ['title', 'content', 'tag', 'cover_pic']
 
 	def form_valid(self, form):
 		form.instance.author = self.request.user

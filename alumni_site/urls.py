@@ -27,7 +27,9 @@ urlpatterns = [
     path('common/news/', common_views.NewsListView.as_view(), name = 'news-home'),
     path('common/news/<int:pk>/', common_views.NewsDetailView.as_view(), name = 'news-detail'),
     path('common/events/<int:pk>/', common_views.EventDetailView.as_view(), name = 'events-detail'),
-    path('common/user-query', common_views.userQuery, name = 'user-query'),
+    path('grievance/', common_views.grievance, name = 'user-grievance'),
+    path('', common_views.userQuery, name = 'user-query'),
+    
     path('blogs/', include('blog.urls')),
     path('posts/', include('post.urls')),
 

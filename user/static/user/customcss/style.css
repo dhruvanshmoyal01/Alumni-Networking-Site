@@ -7,7 +7,6 @@
 }
 
 
-
 * {
 	padding:0;
 	margin:0;
@@ -354,12 +353,6 @@ button.createbtn i {
 	display: none;
 }
 
-#see-more-bio,
-#see-less-bio {
-	color:blue;
-	cursor:pointer;
-	text-transform: lowercase;
-}
 
 @media(max-width: 1100px){
 	.profile-side {
