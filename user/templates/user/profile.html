@@ -97,16 +97,17 @@
                                     width="60"
                                     height="60"
                                   />
-                                  <div class="d-flex flex-column justify-content-start ml-2">
+                                  <div class="d-flex flex-column">
                                     <span class="d-block font-weight-bold name"
-                                      >{{ post.author }}</span
-                                    ><span class="date text-black-50"
+                                      style="margin-right: 175px">
+                                      {{ post.author }}</span>
+                                      <span class="date text-black-50"
                                       >Shared publicly - {{ post.date_posted|date:"F d, Y" }}</span
                                     >
                                   </div>
                                 </div>
                                 <div class="mt-2">
-                                  <p class="comment-text">
+                                  <p class="comment-text" style="margin-right: 600px">
                                     {{ post.msg }}
                                   </p>
                                 </div>
@@ -179,6 +180,13 @@
                             dodlo imat Lorem ipsum dodlo imat Lorem Lorem ipsum dodlo imat
                             ipsum dodlo imat Lorem ipsum dodlo imat Lorem ipsum dodlo imat
                         </p>
+                        <div class="profile-btn">
+                        <button class="chatbtn">
+                            <a href="{% url 'password_reset' %}" style="color: #fff">
+                              <i class="fa fa-key"></i>Reset Password
+                            </a>
+                        </button>
+                    </div>
                     </div>
                 </div>
             </div>

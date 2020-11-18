@@ -43,7 +43,7 @@ urlpatterns = [
     path('profile_all/<int:pk>/', user_views.ProfileDetailView.as_view(), name = 'profile-detail'),
     path('profile_all/follow/<int:pk>/', user_views.follow, name = 'follow-user'),
     path('profile_all/unfollow/<int:pk>/', user_views.unfollow, name = 'unfollow-user'),
-    path('my_activity/', user_views.myactivity, name = 'my-acivity'),
+    path('search/', user_views.userSearch, name = 'user-search'),
 
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name='user/password_reset.html'), name = 'password_reset'),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name='user/password_reset_sent.html'), name = 'password_reset_done'),

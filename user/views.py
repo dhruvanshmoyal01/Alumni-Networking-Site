@@ -15,6 +15,7 @@ from django.views.generic import ( ListView,
                                     UpdateView,
                                     DeleteView, 
                                 )
+from django.contrib.auth.models import User
 from .models import Profile, FollowUser
 from django.db.models import Q
 from django.db.models.query import QuerySet
@@ -193,11 +194,17 @@ def unfollow(request, pk):
     FollowUser.objects.filter(profile=user, followed_by=request.user).delete()
     return HttpResponseRedirect('/profile_all')
 
-def myactivity(request):
-    blog = Blog.objects.filter(Q(author = request.user)).order_by("-date_posted")
-    post = Post.objects.filter(Q(author = request.user)).order_by("-date_posted")
-    content = {
-        'blogs' : blog,
-        'posts' : post,
+@login_required
+def userSearch(request):
+  if request.method == 'POST':
+    usrname = request.POST['iodata']
+    ob = User.objects.filter(username=usrname)
+    plist = []
+    for o in ob:
+      plist.append(o.profile)
+    context={
+      'profile' : plist 
     }
-    return render(request, 'user/my_activity.html', content)
+    return render(request, 'user/profile_list.html', context)
+  else:
+    return render(request, 'user/userSearch.html')

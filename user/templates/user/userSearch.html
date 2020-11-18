@@ -1,0 +1,23 @@
+{% extends "common/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block style %}
+	<link rel="stylesheet" type="text/css" href="{% static 'user/customcss/search_style.css' %}">
+{% endblock style %}
+{% block content %}
+<img class="wave" src="{% static 'user/resources/wave.png' %}" alt="wave  png">
+<div class="container">
+	<div class="login-content">
+		<form method="post" action="{% url 'user-search' %}">
+			{% csrf_token %}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Search User</legend>
+				<input type="text" name="iodata" class="search-field" placeholder="Enter name">
+			</fieldset>
+				<div class="form-group">
+					<button class="btn btn-outline-info" type="submit"><i class="fa fa-search"></i> Search User</button>
+				</div>
+		</form>
+	</div>
+</div>
+{% endblock content %}
