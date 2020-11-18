@@ -22,7 +22,7 @@ class Event(models.Model):
 	date_of_event = models.DateField()
 	venue = models.TextField()
 	time = models.CharField(max_length=50, null=True, blank=True)
-	pic = models.ImageField(upload_to='event_pic')
+	pic = models.ImageField(upload_to='event_pic', null=True, blank=True)
 	organizing_committee = models.CharField(max_length=50, null=True, blank=True)
 	phone_number = models.CharField(max_length=50, null=True, blank=True)
 	email = models.CharField(max_length=100, null=True, blank=True)

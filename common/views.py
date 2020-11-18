@@ -59,7 +59,6 @@ def userQuery(request):
 	message = request.POST['message']
 	UserQuery.objects.create(name=name, email=email, subject=subject, message=message)
 	messages.success(request, f'Query Recieved!')
-
 	return render(request, 'common/index.html')
 
 	
