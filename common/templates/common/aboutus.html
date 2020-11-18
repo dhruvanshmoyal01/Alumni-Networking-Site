@@ -1,0 +1,161 @@
+{% extends "common/Base.html" %}
+{% load static %}
+
+{% block style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'common/customcss/aboutus_style.css' %}">
+{% endblock style %}
+{% block content %}
+<!------------------------------------------------ Main -------------------------------------------------->
+<!-- ======= About Us Heading ======= -->
+    <section id="aboutus">
+      <div class="container" data-aos="fade-up">
+          <div class="section-header " style="padding: 0em;">
+            <h2 style="text-align: left;">About Medicaps University</h2>
+            <hr>
+            </div>
+          </div>
+      </div>
+  </section><!-- End About Section -->
+
+
+<!-- ======= About Medicapss Section ======= -->
+    <section id="about">
+      <div class="container my-1" data-aos="fade-up">
+        <div class="row">
+          <div class="col-lg-9">
+            <img src="{% static 'common/images/bg1.jpeg' %}" width="820" height="400" >
+            <p class="text-center my-4">Medi-Caps is one of the brand names in the arena of technical education and is contributing in making Indore an educational hub. Since its inception in July 2000, the group consistently aims at creating an ideal ambiance for budding technocrats and helping them to grow like true professionals. The main strength of Medi-Caps university is, its highly qualified faculty members.
+            </p>
+            <p class="text-center">We have an optimal blend of academic brilliance and industry exposure, which is supplemented by highly specialized visiting faculty and industry experts, senior professionals from various segments of different industry/ business houses. This has helped in refining the candidature of our graduating students from Engineering and Management field since the last 20 years
+            </p>
+          </div>
+          <div class="col-lg-3">
+      <div class="latest-news">
+        <h4>Related Navigation</h4>
+          <hr>
+        <ul>
+        <li><a href="/aboutus.html">About Us</a></li>
+        <li><a href="/event_home.html">Events at the campus</a></li>
+        <li><a href="#">Education</a></li>
+        <li><a href="#">Research and Development</a></li>
+        <li><a href="#">Internal pages</a></li>
+        <li><a href="#">About this website</a></li>
+        <li><a href="#">Career</a></li>
+        <li><a href="#">External Relations</a></li>
+        </ul>
+      </div>
+    </div>
+        </div>
+      </div>
+  </section><!-- End About Section -->
+
+
+<!-------------------------------------------Medicaps Life content------------------------------------------------------->
+<div class="container-fluid main-area bg-light">
+<div class="container my-4">
+  <div class="row padding">
+    <div class="col-lg-12">
+    <div class="row featurette my-4">
+        <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Life at the <span class="text-muted">Campus</span></h2>
+            <p class="lead">The management, faculty and staff at University are committed to create a positive environment where a student enjoys and experiences the most memorable moments of campus life. Life at University is not just about work, work and work. In fact, it is about ‘freedom and holistic development that eventually makes every student an evolved individual.
+
+            The campus has an eco friendly environment where the sylvan backdrop provides ample fresh air and makes sure that the sights and sounds a student are exposed to be pristine and untainted. This enhances the positive energy and equips him/her with the right mindset to pursue knowledge
+            </p>
+        </div>
+        <div class="col-md-5 order-md-1">
+          <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" 
+          src="{% static 'common/images/gallery-1.jpg' %}" width="400" height="300" >
+            </div>
+        </div>
+    <div class="row featurette my-4">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">Events <span class="text-muted">and</span> Festivities</h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. 
+              Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, 
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.Donec ullamcorper nulla non metus auctor fringilla. 
+              Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, 
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5">
+            <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" 
+            src="{% static 'common/images/gallery-2.jpg' %}" width="400" height="300" >
+            </div>
+        </div>
+    <div class="row featurette my-4">
+        <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Something for the <span class="text-muted">Good</span></h2>
+            <p class="lead">We are committed to transform raw hands into intellectuals by injecting fundamentals with concepts and skills to enable them to face the technology of tomorrow
+            </p>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid" 
+            src="{% static 'common/images/gallery-3.jpg' %}" width="400" height="300" >
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<!-- ======= Gallery Section ======= -->
+
+<div class="my-5 text-center container">
+  <div class="row mb-2">
+     <div class="col text-center">
+        <h1>Gallery</h1>
+        <!-- <p class="lead">Does what it says on the tin.</p> -->
+     </div>
+  </div>
+  <div class="row d-flex align-items-center">
+     <div class="col-1 d-flex align-items-center justify-content-center">
+        <a href="#carouselExampleIndicators" role="button" data-slide="prev">
+           <div class="carousel-nav-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink">
+                 <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z"/>
+              </svg>
+           </div>
+        </a>
+     </div>
+     <div class="col-10">
+        <!--Start carousel-->
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+           <div class="carousel-inner">
+              <div class="carousel-item active">
+                 <div class="row">
+                    <div style="background-image:url('{% static 'common/images/gallery/1.jpg' %}');" class="col-12 col-md d-flex align-items-center justify-content-center">
+                    </div>
+                    <div style="background-image:url('{% static 'common/images/gallery/2.jpg' %}');" class="col-12 col-md d-flex align-items-center justify-content-center">
+                    </div>
+                    <div style="background-image:url('{% static 'common/images/gallery/3.jpg' %}');" class="col-12 col-md d-flex align-items-center justify-content-center" class="col-12 col-md d-flex align-items-center justify-content-center">
+                       <h3 class="text-white">Text in the panel.</h3>
+                    </div>
+                 </div>
+              </div>
+              <div class="carousel-item">
+                 <div class="row">
+                    <div style="background-image:url('{% static 'common/images/gallery/4.jpg' %}');" class="col-12 col-md d-flex align-items-center justify-content-center">
+                    </div>
+                    <div style="background-image:url('{% static 'common/images/gallery/5.jpg' %}');" class="col-12 col-md d-flex align-items-center justify-content-center">
+                    </div>
+                    <div style="background-image:url('{% static 'common/images/gallery/6.jpg' %}');" class="col-12 col-md d-flex align-items-center justify-content-center" class="col-12 col-md d-flex align-items-center justify-content-center">
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+        <!--End carousel-->
+     </div>
+     <div class="col-1 d-flex align-items-center justify-content-center"><a  href="#carouselExampleIndicators" data-slide="next">
+        <div class="carousel-nav-icon">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <path d="m40.4,121.3c-0.8,0.8-1.8,1.2-2.9,1.2s-2.1-0.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8,0l53.9,53.9c1.6,1.6 1.6,4.2 0,5.8l-53.9,53.9z"/>
+           </svg>
+        </div>
+        </a>
+     </div>
+  </div>
+</div>
+<!-- End Gallery Section -->
+{% endblock content %}

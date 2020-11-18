@@ -13,6 +13,9 @@ def index(request):
 	}
 	return render(request, 'common/index.html', content)
 
+def aboutUs(request):
+	return render(request, 'common/aboutus.html')
+
 class NewsListView(ListView):
 	model = News
 	template_name = 'common/news.html'

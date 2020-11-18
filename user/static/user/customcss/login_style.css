@@ -5,9 +5,13 @@
 	box-sizing: border-box;
 }
 
+html {
+    height: 110%;
+    margin-bottom: 0.01em;
+}
+
 body{
     font-family: 'Poppins', sans-serif;
-    overflow: hidden;
 }
 
 .wave{
@@ -38,6 +42,22 @@ body{
 	justify-content: flex-start;
 	align-items: center;
 	text-align: center;
+}
+
+.typeA {
+  width: 80%;
+  margin:auto;
+  height: 90vh;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  text-decoration: none!important;
+}
+
+.typeA SPAN{
+  margin:auto;
+	text-align: center;
+  text-decoration: none!important;
 }
 
 .img img{

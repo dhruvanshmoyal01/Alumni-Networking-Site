@@ -26,34 +26,21 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'index-page' %}">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Career
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Job</a>
-              <a class="dropdown-item" href="#">Internship</a>
-              <a class="dropdown-item" href="#">Mentorship</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'blog-home' %}">Blogs <span class="sr-only"></span></a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Events
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">All Events</a>
-              <a class="dropdown-item" href="#">Alumni Event Calander</a>
-              <a class="dropdown-item" href="#">Projects</a>
-            </div>
-          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'post-home' %}">Posts <span class="sr-only"></span></a>
+          </li>                    
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               About Us
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Vision & Mission</a>
-              <a class="dropdown-item" href="#">Contact us</a>
+              <a class="dropdown-item" href="{% url 'about' %}">Vision & Mission</a>
+              <a class="dropdown-item" href="{% url 'user-grievance' %}">Contact us</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -61,19 +48,19 @@
               More
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Search Alumni</a>
-              <a class="dropdown-item" href="#">Class Group</a>
-              <a class="dropdown-item" href="#">Reunion Corner</a>
+              <a class="dropdown-item" href="{% url 'profile-list' %}">Search Alumni</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Photo Gallery</a>
-              <a class="dropdown-item" href="#">Newsletter</a>
+              <a class="dropdown-item" href="{% url 'news-home' %}">Newsletter</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Donate Now</a>
+              <a class="dropdown-item" href="#">Job Board</a>
             </div>
           </li>
         </ul>
         {% if user.is_authenticated %}
           <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>

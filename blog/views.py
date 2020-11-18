@@ -7,18 +7,20 @@ from django.views.generic import ( ListView,
 									DeleteView, 
 								)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from user.models import FollowUser
 from django.http import HttpResponseRedirect
 
 # Create your views here.
+@login_required
 def blogs(request):
 	content = {
 		'blogs' : Blog.objects.all(),
 	}
 	return render(request, 'blog/blogs.html', content)
 
-class BlogListView(ListView):
+class BlogListView(LoginRequiredMixin, ListView):
 	model = Blog
 	template_name = 'blog/blogs.html'
 	
@@ -43,7 +45,7 @@ class BlogListView(ListView):
 		return context
 
 
-class BlogDetailView(DetailView):
+class BlogDetailView(LoginRequiredMixin, DetailView):
 	model = Blog
 
 	def get_context_data(self, **kwargs):
@@ -107,7 +109,7 @@ def blog_comment(request, pk):
 	Blog_comment.objects.create(blog=blog, msg=msg, commented_by=request.user)
 	return HttpResponseRedirect('/blogs/blog/{}'.format(pk))
 
-class BlogListTagView(ListView):
+class BlogListTagView(LoginRequiredMixin, ListView):
 	model = Blog
 	template_name = 'blog/blogs.html'
 	
@@ -131,6 +133,7 @@ class BlogListTagView(ListView):
 		context["blogs"] = blogs
 		return context
 
+@login_required
 def blogs_tag(request, tag):
 	followedList = FollowUser.objects.filter(followed_by = request.user)
 	followedList2 = []

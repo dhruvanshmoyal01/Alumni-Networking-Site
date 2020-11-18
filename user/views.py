@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import UserRegisterForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import ( UserRegisterForm,
 					 UserUpdateForm,
 					 ProfileUpdateForm
@@ -119,7 +120,7 @@ def follow(request, pk):
     FollowUser.objects.create(profile=user, followed_by=request.user)
     return HttpResponseRedirect('/profile_all')
 
-class ProfileListView(ListView):
+class ProfileListView(LoginRequiredMixin, ListView):
     model = Profile
     template_name = 'user/profile_list.html'
     context_object_name = 'profile'
@@ -136,7 +137,7 @@ class ProfileListView(ListView):
                 p.followed = True
         return profileList
 
-class ProfileDetailView(DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = Profile
 
     def get_context_data(self, **kwargs):

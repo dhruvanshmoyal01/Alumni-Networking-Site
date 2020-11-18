@@ -7,6 +7,7 @@ from django.views.generic import ( ListView,
 									DeleteView, 
 								)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.db.models import Q
 from user.models import FollowUser
@@ -19,7 +20,7 @@ def posts(request):
 	}
 	return render(request, 'post/posts.html', content)
 
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin, ListView):
 	model = Post
 	template_name = 'post/posts.html'
 	
@@ -43,7 +44,7 @@ class PostListView(ListView):
 		context["posts"] = posts
 		return context
 
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView):
 	model = Post
 
 	def get_context_data(self, **kwargs):

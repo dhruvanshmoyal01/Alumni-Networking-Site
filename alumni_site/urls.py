@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', common_views.index, name='index-page'),
+    path('about/', common_views.aboutUs, name='about'),
     path('common/news/', common_views.NewsListView.as_view(), name = 'news-home'),
     path('common/news/<int:pk>/', common_views.NewsDetailView.as_view(), name = 'news-detail'),
     path('common/events/<int:pk>/', common_views.EventDetailView.as_view(), name = 'events-detail'),
